@@ -7,4 +7,4 @@ services:
     startCommand: streamlit run win_pred/app.py --server.port=$PORT --server.enableCORS false
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10
+        value: 3.10.12
