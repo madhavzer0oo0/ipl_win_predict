@@ -1,19 +1,9 @@
 import streamlit as st
 import pandas as pd
-import os
-from skops.io import load, get_untrusted_types
-import streamlit as st
 
-# Ensure path is relative to current script
-model_path = os.path.join(os.path.dirname(__file__), "final_win_predictor_pipeline.skops")
+import joblib
 
-st.write(f"🔍 Looking for model at: {model_path}")
-
-# Get untrusted types and load
-untrusted = get_untrusted_types(file=model_path)
-pipeline = load(file=model_path, trusted=untrusted)
-
-st.success("✅ Model loaded successfully!")
+pipeline = joblib.load("final_win_predictor_pipeline.pkl")
 
 
 # Predefined options
