@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-pipeline = joblib.load('final_win_predictor_pipeline.joblib')
+pipeline = joblib.load('final_win_predictor_pipeline.pkl')
 
 
 # Predefined options
