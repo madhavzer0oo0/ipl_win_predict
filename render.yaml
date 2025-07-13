@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ipl-win-predictor
+    env: python
+    plan: free
+    buildCommand: pip install -r win_pred/requirements.txt
+    startCommand: streamlit run win_pred/app.py --server.port=$PORT --server.enableCORS false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
