@@ -5,8 +5,7 @@ from skops.io import load
 
 
 
-untrusted = get_untrusted_types(file="final_win_predictor_pipeline.skops")
-
+untrusted = get_untrusted_types(file="win_predict/final_win_predictor_pipeline.skops")
 pipeline = load("final_win_predictor_pipeline.skops", trusted=untrusted)
 
 
