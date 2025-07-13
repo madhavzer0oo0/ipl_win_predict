@@ -1,22 +1,23 @@
-# train_pipeline.py
+# win_pred/train_pipeline.py
+
 import pandas as pd
-from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
-import joblib
+from skops.io import dump
 
-# Load your CSV
+# Load dataset
 df = pd.read_csv("win_prediction_data.csv")
 
-# Define input & output
+# Features & target
 X = df.drop(columns=["won"])
 y = df["won"]
 
-# Categorical columns
+# Define categorical columns
 categorical_cols = ["batting_team", "bowling_team", "venue"]
 
-# Preprocessor
+# Preprocessing
 preprocessor = ColumnTransformer([
     ("onehot", OneHotEncoder(drop="first", handle_unknown="ignore"), categorical_cols)
 ], remainder="passthrough")
@@ -24,11 +25,11 @@ preprocessor = ColumnTransformer([
 # Pipeline
 pipeline = Pipeline([
     ("preprocessing", preprocessor),
-    ("classifier", LogisticRegression(max_iter=2000))
+    ("model", LogisticRegression(max_iter=2000))
 ])
 
-# Train
+# Train the model
 pipeline.fit(X, y)
 
-# Save to disk (in same folder)
-joblib.dump(pipeline, "final_win_predictor_pipeline.pkl")
+# Save as skops
+dump(pipeline, "final_win_predictor_pipeline.skops")
